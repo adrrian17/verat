@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'mercenary'
+require 'verat'
+
+Mercenary.program(:verat) do |p|
+  p.version Verat::VERSION
+  p.description 'git-flow CLI manager tool'
+  p.syntax 'verat <subcommand>'
+
+  p.command(:feature) do |feature|
+    feature.syntax "feature <subcommand>"
+    feature.description "Command for features related actions"
+
+    feature.command(:start) do |start|
+      start.syntax 'start FEATURE [options]'
+      start.description 'Creates a new feature branch'
+
+      start.action do |args, options|
+        Verat::Feature.start(args.first)
+      end
+    end
+  end
+
+end
