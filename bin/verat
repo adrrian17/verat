@@ -14,11 +14,21 @@ Mercenary.program(:verat) do |p|
     feature.description "Command for features related actions"
 
     feature.command(:start) do |start|
-      start.syntax 'start FEATURE [options]'
+      start.syntax 'start FEATURE'
       start.description 'Creates a new feature branch'
 
       start.action do |args, options|
         Verat::Feature.start(args.first)
+      end
+    end
+
+    feature.command(:finish) do |finish|
+      finish.syntax 'finish FEATURE [options]'
+      finish.description 'Finishes a feature branch'
+      finish.option 'delete', '-d', '--delete', 'Deletes feature branch'
+
+      finish.action do |args, options|
+        Verat::Feature.finish(args.first, options)
       end
     end
   end
