@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Verat::VERSION
   spec.authors       = ["Adrian Ayala"]
   spec.email         = ["adrian.ayala17@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{git-flow CLI manager}
+  spec.summary       = %q{verat is a CLI tool to manage with ease git-flow branching model}
+  spec.homepage      = "https://github.com/adrrian17/verat"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
