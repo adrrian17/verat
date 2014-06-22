@@ -5,4 +5,5 @@ module Verat
   autoload :VERSION, 'verat/version'
   autoload :Feature, 'verat/feature'
   autoload :Hotfix,  'verat/hotfix'
+  autoload :Release, 'verat/release'
 end

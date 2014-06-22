@@ -56,4 +56,29 @@ Mercenary.program(:verat) do |p|
       end
     end
   end
+
+  p.command(:release) do |release|
+    release.syntax "release <subcommand>"
+    release.description "Command for releasees related actions"
+
+    release.command(:start) do |start|
+      start.syntax 'start RELEASE'
+      start.description 'Creates a new release branch'
+
+      start.action do |args, options|
+        Verat::release.start(args.first)
+      end
+    end
+
+    release.command(:finish) do |finish|
+      finish.syntax 'finish RELEASE [options]'
+      finish.description 'Finishes a release branch'
+      finish.option 'delete', '-d', '--delete', 'Deletes release branch'
+      finish.option 'tag', '-t', '--tag', 'Creates a tag with the release version'
+
+      finish.action do |args, options|
+        Verat::Release.finish(args.first, options)
+      end
+    end
+  end
 end
