@@ -1,0 +1,84 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'mercenary'
+require 'verat'
+
+Mercenary.program(:verat) do |p|
+  p.version Verat::VERSION
+  p.description 'git-flow CLI manager tool'
+  p.syntax 'verat <subcommand>'
+
+  p.command(:feature) do |feature|
+    feature.syntax "feature <subcommand>"
+    feature.description "Command for features related actions"
+
+    feature.command(:start) do |start|
+      start.syntax 'start FEATURE'
+      start.description 'Creates a new feature branch'
+
+      start.action do |args, options|
+        Verat::Feature.start(args.first)
+      end
+    end
+
+    feature.command(:finish) do |finish|
+      finish.syntax 'finish FEATURE [options]'
+      finish.description 'Finishes a feature branch'
+      finish.option 'delete', '-d', '--delete', 'Deletes feature branch'
+
+      finish.action do |args, options|
+        Verat::Feature.finish(args.first, options)
+      end
+    end
+  end
+
+  p.command(:hotfix) do |hotfix|
+    hotfix.syntax "hotfix <subcommand>"
+    hotfix.description "Command for hotfixes related actions"
+
+    hotfix.command(:start) do |start|
+      start.syntax 'start HOTFIX'
+      start.description 'Creates a new hotfix branch'
+
+      start.action do |args, options|
+        Verat::Hotfix.start(args.first)
+      end
+    end
+
+    hotfix.command(:finish) do |finish|
+      finish.syntax 'finish HOTFIX [options]'
+      finish.description 'Finishes a hotfix branch'
+      finish.option 'delete', '-d', '--delete', 'Deletes hotfix branch'
+
+      finish.action do |args, options|
+        Verat::Hotfix.finish(args.first, options)
+      end
+    end
+  end
+
+  p.command(:release) do |release|
+    release.syntax "release <subcommand>"
+    release.description "Command for releasees related actions"
+
+    release.command(:start) do |start|
+      start.syntax 'start RELEASE'
+      start.description 'Creates a new release branch'
+
+      start.action do |args, options|
+        Verat::release.start(args.first)
+      end
+    end
+
+    release.command(:finish) do |finish|
+      finish.syntax 'finish RELEASE [options]'
+      finish.description 'Finishes a release branch'
+      finish.option 'delete', '-d', '--delete', 'Deletes release branch'
+      finish.option 'tag', '-t', '--tag', 'Creates a tag with the release version'
+
+      finish.action do |args, options|
+        Verat::Release.finish(args.first, options)
+      end
+    end
+  end
+end
