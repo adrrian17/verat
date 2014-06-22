@@ -33,4 +33,27 @@ Mercenary.program(:verat) do |p|
     end
   end
 
+  p.command(:hotfix) do |hotfix|
+    hotfix.syntax "hotfix <subcommand>"
+    hotfix.description "Command for hotfixes related actions"
+
+    hotfix.command(:start) do |start|
+      start.syntax 'start HOTFIX'
+      start.description 'Creates a new hotfix branch'
+
+      start.action do |args, options|
+        Verat::Hotfix.start(args.first)
+      end
+    end
+
+    hotfix.command(:finish) do |finish|
+      finish.syntax 'finish HOTFIX [options]'
+      finish.description 'Finishes a hotfix branch'
+      finish.option 'delete', '-d', '--delete', 'Deletes hotfix branch'
+
+      finish.action do |args, options|
+        Verat::Hotfix.finish(args.first, options)
+      end
+    end
+  end
 end
