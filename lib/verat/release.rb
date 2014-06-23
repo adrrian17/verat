@@ -3,19 +3,19 @@ require 'git'
 module Verat
   class Release
     def self.start(release)
-      puts "Creating branch: release/#{release}"
+      puts "Creating branch: release-#{release}"
 
       repo = Git.open(Dir.pwd)
-      repo.branch("release/#{release}").checkout
+      repo.branch("release-#{release}").checkout
 
-      puts "Branch created succesfuly. Current branch: release/#{release}"
+      puts "Branch created succesfuly. Current branch: release-#{release}"
     end
 
     def self.finish(release, options)
       puts "Finishing release: #{release}"
 
       repo   = Git.open(Dir.pwd)
-      branch = "release/#{release}"
+      branch = "release-#{release}"
 
       if repo.current_branch() != 'master' and repo.is_branch?(branch)
         repo.checkout('master')

@@ -1,9 +1,9 @@
-Verat [![Gem Version](https://badge.fury.io/rb/verat.svg)](http://badge.fury.io/rb/verat)
+Verat [![Gem Version](https://badge.fury.io/rb/verat.svg)](http://badge.fury.io/rb/verat) [![Dependency Status](https://gemnasium.com/adrrian17/verat.svg)](https://gemnasium.com/adrrian17/verat)
 =====
 
 Verat is a gitflow CLI manager. It is inspired in Vincent Driessen's [branching model](http://nvie.com/posts/a-successful-git-branching-model/) and his plugin [gitflow](https://github.com/nvie/gitflow)
 
-##Instalation 
+##Installation
 ```
 $ gem install verat
 ```

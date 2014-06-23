@@ -3,19 +3,19 @@ require 'git'
 module Verat
   class Hotfix
     def self.start(hotfix)
-      puts "Creating branch: hotfix/#{hotfix}"
+      puts "Creating branch: hotfix-#{hotfix}"
 
       repo = Git.open(Dir.pwd)
-      repo.branch("hotfix/#{hotfix}").checkout
+      repo.branch("hotfix-#{hotfix}").checkout
 
-      puts "Branch created succesfuly. Current branch: hotfix/#{hotfix}"
+      puts "Branch created succesfuly. Current branch: hotfix-#{hotfix}"
     end
 
     def self.finish(hotfix, options)
       puts "Finishing hotfix: #{hotfix}"
 
       repo   = Git.open(Dir.pwd)
-      branch = "hotfix/#{hotfix}"
+      branch = "hotfix-#{hotfix}"
 
       if repo.current_branch() != 'master' and repo.is_branch?(branch)
         repo.checkout('master')

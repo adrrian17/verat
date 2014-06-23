@@ -59,14 +59,14 @@ Mercenary.program(:verat) do |p|
 
   p.command(:release) do |release|
     release.syntax "release <subcommand>"
-    release.description "Command for releasees related actions"
+    release.description "Command for releases related actions"
 
     release.command(:start) do |start|
       start.syntax 'start RELEASE'
       start.description 'Creates a new release branch'
 
       start.action do |args, options|
-        Verat::release.start(args.first)
+        Verat::Release.start(args.first)
       end
     end
 
