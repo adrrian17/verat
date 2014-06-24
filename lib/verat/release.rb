@@ -23,8 +23,10 @@ module Verat
         # Temporary fix until git adds options to the merge method
         status = system("git merge --no-ff #{branch}")
         if status
-          puts "Creating release tag: #{release}"
-          repo.add_tag("#{release}",  {:a => true, :message => "v#{release}"})
+          if options['tag'] != false
+            puts "Creating release tag: #{release}"
+            repo.add_tag("#{release}",  {:a => true, :message => "v#{release}"})
+          end
 
           repo.checkout('develop')
           system("git merge --no-ff #{branch}")
@@ -38,8 +40,8 @@ module Verat
         end
       end
 
-      if options['delete'] then
-        repo.branch("#{branch}").delete
+      if options['delete']
+        repo.branch(branch).delete
         puts "Deleting release branch: #{branch}"
       end
 
