@@ -40,8 +40,8 @@ module Verat
         end
       end
 
-      if options['delete'] then
-        repo.branch("#{branch}").delete
+      if options['delete']
+        repo.branch(branch).delete
         puts "Deleting release branch: #{branch}"
       end
 
