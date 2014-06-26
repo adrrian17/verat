@@ -38,7 +38,10 @@ To start a new release run this command, *RELEASE* will be the version of the re
 verat release start RELEASE
 ```
 
-Once you finished the release run this command. It will checkout to master branch, merge the release branch and then checkout to the develop branch and merge the release branch. Optionally you can pass the ```-t``` or ```--tag``` to create a tag with the name of the branch
+Once you finished the release run this command. It will checkout to master branch, merge the release branch and then checkout to the develop branch and merge the release branch.
+
+Optionally you can pass the ```--no-tag``` to prevent that Verat creats automatically a tag, so you can later make the tag by yourself.
+
 ```
 verat release finish RELEASE
 ```

@@ -74,7 +74,7 @@ Mercenary.program(:verat) do |p|
       finish.syntax 'finish RELEASE [options]'
       finish.description 'Finishes a release branch'
       finish.option 'delete', '-d', '--delete', 'Deletes release branch'
-      finish.option 'tag', '-t', '--tag', 'Creates a tag with the release version'
+      finish.option 'tag', '--no-tag', 'Prevents that Verat creates a release version tag'
 
       finish.action do |args, options|
         Verat::Release.finish(args.first, options)
