@@ -2,13 +2,37 @@ require 'git'
 
 module Verat
   class Feature
-    def self.start(feature)
-      puts "Creating branch: feature/#{feature}"
+    def self.process(cmd, feature, options)
+      @repo = Git.open(Dir.pwd)
 
-      repo = Git.open(Dir.pwd)
-      repo.branch("feature/#{feature}").checkout
+      self.start(@repo, feature) if cmd == 'start'
+      self.finish(@repo, cmd, options) if cmd == 'finish'
+    end
 
-      puts "Branch created succesfuly. Current branch: feature/#{feature}"
+    def self.start(repo, feature)
+      branch = "feature/#{feature}"
+
+      if repo.current_branch == branch
+        puts "Already on feature/#{feature}"
+        exit 0
+      elsif repo.is_branch?(branch)
+        puts "Feature branch '#{branch}' already exists..."
+        puts "Switching to this branch..."
+        repo.branch(branch).checkout
+        exit 0
+      end
+
+      begin
+        repo.branch(branch).checkout
+
+        raise "Error: couldn't create branch 'feature/#{feature}'" unless repo.is_branch?(branch)
+
+        puts "Summary:".colorize(:blue).underline
+        puts "Created branch 'feature/#{feature}'"
+        puts "When the feature is ready run: verat feature finish #{feature}"
+      rescue Exception => e
+        puts e.message
+      end
     end
 
     def self.finish(feature, options)

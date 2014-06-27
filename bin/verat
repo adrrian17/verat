@@ -18,7 +18,7 @@ Mercenary.program(:verat) do |p|
       start.description 'Creates a new feature branch'
 
       start.action do |args, options|
-        Verat::Feature.start(args.first)
+        Verat::Feature.process('start', args.first, options)
       end
     end
 
